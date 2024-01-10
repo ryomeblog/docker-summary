@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  flask-dev:
+    build: .
+    ports:
+      - "5000:5000" # Flaskのデフォルトポートをホストとマッピング
+    volumes:
+      - .:/app # 現在のディレクトリをコンテナの/appにマウント
+    tty: true

@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - mysql-data:/var/lib/mysql # データの永続化
+      - ./my-custom.cnf:/etc/mysql/conf.d/my-custom.cnf # カスタム設定ファイル
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306" # ホストマシンのポートをコンテナにマッピング
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "8080:80" # ホストマシンのポート8080をコンテナの80ポートにマッピング
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data: # データボリュームの定義

@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  dynamodb-local:
+    image: amazon/dynamodb-local
+    ports:
+      - "8000:8000" # ローカルポート8000をコンテナの8000ポートにマッピング
+    volumes:
+      - dynamodb-data:/home/dynamodblocal/data # データの永続化
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin
+    environment:
+      DYNAMO_ENDPOINT: http://dynamodb-local:8000
+    ports:
+      - "8001:8001" # ローカルポート8001をコンテナの8001ポートにマッピング
+    depends_on:
+      - "dynamodb-local"
+
+volumes:
+  dynamodb-data: # データボリュームの定義

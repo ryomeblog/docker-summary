@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mattermost:
+    image: mattermost/mattermost-team:latest
+    ports:
+      - "8065:8065"
+    volumes:
+      - ./config:/mattermost/config
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mattermost
+      MYSQL_USER: mattermost
+      MYSQL_PASSWORD: password

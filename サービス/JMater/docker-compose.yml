@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  jmeter:
+    build: .
+    volumes:
+      - .:/jmeter
+    tty: true

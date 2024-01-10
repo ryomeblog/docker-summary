@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  rust-dev:
+    build: .
+    volumes:
+      - .:/usr/src/myapp
+    tty: true

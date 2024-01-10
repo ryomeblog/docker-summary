@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  go-app:
+    build: .
+    volumes:
+      - .:/app # 現在のディレクトリをコンテナの/appにマウント
+    tty: true

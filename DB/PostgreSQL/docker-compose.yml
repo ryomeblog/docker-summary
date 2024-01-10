@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    volumes:
+      - postgres-data:/var/lib/postgresql/data # データの永続化
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # 初期化スクリプト
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432" # ホストマシンのポートをコンテナにマッピング
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80" # ホストマシンのポート5050をコンテナの80ポートにマッピング
+    depends_on:
+      - postgres
+
+volumes:
+  postgres-data: # データボリュームの定義

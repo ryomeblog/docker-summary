@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  react-app:
+    build: .
+    ports:
+      - "3000:3000" # Reactアプリのデフォルトポートをホストとマッピング
+    volumes:
+      - .:/app # 現在のディレクトリをコンテナの/appにマウント
+    tty: true

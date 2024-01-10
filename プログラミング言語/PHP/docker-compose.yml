@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  php-app:
+    build: .
+    volumes:
+      - .:/var/www/html # 現在のディレクトリをコンテナの/var/www/htmlにマウント
+    ports:
+      - "80:80" # コンテナの80ポートをホストの80ポートにマッピング
+    tty: true

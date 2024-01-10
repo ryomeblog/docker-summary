@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  swift:
+    image: swift:latest
+    volumes:
+      - .:/app
+    working_dir: /app
+    tty: true
+    command: /bin/bash
